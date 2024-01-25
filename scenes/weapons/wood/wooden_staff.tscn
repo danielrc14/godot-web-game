@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmtdh3o1ab2s3"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_yk4ev"]
+
+[node name="WoodenStaff" type="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -15)
+texture = ExtResource("1_yk4ev")
+region_enabled = true
+region_rect = Rect2(96, 16, 16, 48)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch833dgps0ado"]
+
+[ext_resource type="Script" path="res://scenes/characters/player.gd" id="1_if7uv"]
+[ext_resource type="PackedScene" uid="uid://eyohjxgn8cey" path="res://scenes/characters/character.tscn" id="1_v8f4j"]
+[ext_resource type="Script" path="res://scenes/characters/camera.gd" id="3_8qb8q"]
+[ext_resource type="Shader" path="res://resources/hit_effect.gdshader" id="3_b47jt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xisfr"]
+resource_local_to_scene = true
+shader = ExtResource("3_b47jt")
+shader_parameter/hit_opacity = 0.0
+
+[node name="Player" instance=ExtResource("1_v8f4j")]
+script = ExtResource("1_if7uv")
+max_player_hp = 50
+
+[node name="Body" parent="." index="0"]
+material = SubResource("ShaderMaterial_xisfr")
+
+[node name="LeftHand" parent="Body" index="0"]
+z_index = 2
+
+[node name="RightHand" parent="Body" index="1"]
+z_index = 2
+
+[node name="HealthBar" parent="." index="2"]
+z_index = 5
+
+[node name="Camera" type="Camera2D" parent="." index="4"]
+limit_left = 0
+limit_top = 0
+limit_right = 3200
+limit_bottom = 3200
+position_smoothing_speed = 3.0
+script = ExtResource("3_8qb8q")
+randomStrength = 20.0
+
+[connection signal="camera_shake" from="." to="Camera" method="_on_player_camera_shake"]
+[connection signal="area_entered" from="Body/HitArea" to="." method="_on_hit_area_area_entered"]

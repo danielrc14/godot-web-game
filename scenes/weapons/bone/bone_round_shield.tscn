@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxyiajkasowfo"]
+
+[ext_resource type="Texture2D" uid="uid://qxxqk1j5hhp4" path="res://textures/Weapons/Bone/Bone.png" id="1_bc0h6"]
+
+[node name="BoneRoundShield" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_bc0h6")
+region_enabled = true
+region_rect = Rect2(128, 0, 16, 16)

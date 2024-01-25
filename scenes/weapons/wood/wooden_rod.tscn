@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://canagdoftb1iu"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_0kt0t"]
+
+[node name="WoodenRod" type="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -9)
+rotation = 4.71239
+texture = ExtResource("1_0kt0t")
+region_enabled = true
+region_rect = Rect2(80, 0, 32, 16)

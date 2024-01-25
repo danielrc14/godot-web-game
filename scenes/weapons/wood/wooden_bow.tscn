@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2rke37er2ud1"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_nq0lt"]
+
+[sub_resource type="Animation" id="Animation_c3ndx"]
+resource_name = "shoot"
+length = 5.0001
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WoodenBow/Arrow:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WoodenBow/Arrow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(4, 0), Vector2(1.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WoodenBow/Bow:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xqpq3"]
+_data = {
+"shoot": SubResource("Animation_c3ndx")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0b6y"]
+atlas = ExtResource("1_nq0lt")
+region = Rect2(48, 48, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwglu"]
+atlas = ExtResource("1_nq0lt")
+region = Rect2(64, 48, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1e48"]
+atlas = ExtResource("1_nq0lt")
+region = Rect2(80, 48, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r6dp7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0b6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwglu")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_a1e48")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0b6y")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[node name="WoodenBow" type="AnimationPlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_xqpq3")
+}
+speed_scale = 5.0
+
+[node name="Bow" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2, 0)
+sprite_frames = SubResource("SpriteFrames_r6dp7")
+animation = &"shoot"
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(1.5, 0)
+scale = Vector2(0.960003, 0.967392)
+texture = ExtResource("1_nq0lt")
+region_enabled = true
+region_rect = Rect2(32, 0, 16, 16)

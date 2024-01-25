@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dywrw5aw8p4yy"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_kj75t"]
+
+[node name="WoodenTome" type="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -6)
+texture = ExtResource("1_kj75t")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)

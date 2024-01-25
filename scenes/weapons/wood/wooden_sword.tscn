@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ow6e37c1x512"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_j3lgu"]
+
+[node name="WoodenSword" type="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -15)
+texture = ExtResource("1_j3lgu")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)
