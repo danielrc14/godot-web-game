@@ -14,6 +14,7 @@ func _ready():
 	multiplayer.multiplayer_peer = peer
 	create_player(false, multiplayer.get_unique_id())
 	local_player.player_moved.connect(_on_player_moved)
+	local_player.player_attacked.connect(_on_player_attacked)
 	
 
 func create_player(is_remote_player, player_id):
@@ -43,6 +44,10 @@ func _on_peer_connection_failed():
 	
 func _on_player_moved(player_id, velocity_vector, previous_x, previous_y):
 	update_player_movement.rpc(player_id, velocity_vector, previous_x, previous_y)
+
+	
+func _on_player_attacked(player_id):
+	make_player_attack.rpc(player_id)
 	
 	
 @rpc("authority", "call_remote", "reliable", 0)
@@ -64,3 +69,9 @@ func update_player_movement(player_id, velocity_vector, previous_x, previous_y):
 		remote_players[player_id].position.x = previous_x
 		remote_players[player_id].position.y = previous_y
 		remote_players[player_id].player_velocity_vector = velocity_vector
+		
+		
+@rpc("any_peer", "call_remote", "unreliable", 0)
+func make_player_attack(player_id):
+	if remote_players.has(player_id):
+		remote_players[player_id].attack()

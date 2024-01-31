@@ -1,7 +1,7 @@
 extends Character
 signal camera_shake
 signal player_moved(player_id, velocity_vector, previous_x, previous_y)
-signal player_attacked
+signal player_attacked(player_id)
 
 @export var max_player_hp: int = 50
 var is_remote_player = false
@@ -35,6 +35,7 @@ func handle_inputs(delta):
 			
 		if Input.is_action_just_pressed("attack"):
 			attack()
+			player_attacked.emit(player_id)
 
 func _physics_process(delta):
 	if is_remote_player:
