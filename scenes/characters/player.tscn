@@ -11,6 +11,7 @@ shader = ExtResource("3_b47jt")
 shader_parameter/hit_opacity = 0.0
 
 [node name="Player" instance=ExtResource("1_v8f4j")]
+collision_layer = 128
 script = ExtResource("1_if7uv")
 max_player_hp = 50
 
@@ -36,4 +37,3 @@ script = ExtResource("3_8qb8q")
 randomStrength = 20.0
 
 [connection signal="camera_shake" from="." to="Camera" method="_on_player_camera_shake"]
-[connection signal="area_entered" from="Body/HitArea" to="." method="_on_hit_area_area_entered"]
