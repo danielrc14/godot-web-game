@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnsssau554f1j"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_s38nj"]
+
+[node name="WoodenQuiver" type="Node"]
+
+[node name="Arrow" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, -15)
+rotation = 3.14159
+texture = ExtResource("1_s38nj")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(16, 8, 16, 8)
+
+[node name="Arrow2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -13)
+rotation = 3.14159
+texture = ExtResource("1_s38nj")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="Arrow3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3, -14)
+rotation = 3.14159
+texture = ExtResource("1_s38nj")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(16, 8, 16, 8)
+
+[node name="BaseQuiver" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_s38nj")
+region_enabled = true
+region_rect = Rect2(80, 16, 16, 24)

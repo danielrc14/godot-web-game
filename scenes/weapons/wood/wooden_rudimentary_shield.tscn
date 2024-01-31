@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://buminqrj4v42n"]
+
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_bi3tx"]
+
+[node name="WoodenRudimentaryShield" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_bi3tx")
+region_enabled = true
+region_rect = Rect2(112, 0, 16, 16)
