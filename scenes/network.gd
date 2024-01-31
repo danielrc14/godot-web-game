@@ -62,6 +62,13 @@ func create_existing_players(incoming_player_id, players_ids):
 			if str(player_id) != str(multiplayer.get_unique_id()):
 				create_player(true, player_id)
 				
+				
+@rpc("authority", "call_remote", "reliable", 0)
+func remove_player(player_id):
+	if remote_players.has(player_id):
+		remote_players[player_id].queue_free()
+		remote_players.erase(player_id)
+				
 
 @rpc("any_peer", "call_remote", "unreliable", 0)
 func update_player_movement(player_id, velocity_vector, previous_x, previous_y):
