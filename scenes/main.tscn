@@ -1,28 +1,22 @@
-[gd_scene load_steps=14 format=3 uid="uid://dejgpf2h61b5k"]
+[gd_scene load_steps=12 format=3 uid="uid://dejgpf2h61b5k"]
 
-[ext_resource type="PackedScene" uid="uid://ch833dgps0ado" path="res://scenes/characters/player.tscn" id="1_bcru2"]
-[ext_resource type="PackedScene" uid="uid://ow6e37c1x512" path="res://scenes/weapons/wood/wooden_sword.tscn" id="2_3syp7"]
 [ext_resource type="PackedScene" uid="uid://0kvi2eatm2dy" path="res://scenes/characters/enemy.tscn" id="2_d7o8x"]
-[ext_resource type="PackedScene" uid="uid://8guxak71bdbo" path="res://scenes/weapons/wood/wooden_round_shield.tscn" id="3_gcqtt"]
 [ext_resource type="PackedScene" uid="uid://bnpilkhra4kju" path="res://scenes/weapons/bone/bone_sword.tscn" id="5_ekkyr"]
 [ext_resource type="PackedScene" uid="uid://65wlrbyedilu" path="res://scenes/weapons/bone/bone_club.tscn" id="5_jfgcv"]
 [ext_resource type="PackedScene" uid="uid://bxyiajkasowfo" path="res://scenes/weapons/bone/bone_round_shield.tscn" id="6_jsv0d"]
-[ext_resource type="SpriteFrames" uid="uid://rhp4ihvlqsdb" path="res://resources/sprite_frames/enemies/regular skeleton.tres" id="7_fiv8a"]
+[ext_resource type="SpriteFrames" uid="uid://rhp4ihvlqsdb" path="res://resources/sprite_frames/enemies/regular_skeleton.tres" id="7_fiv8a"]
 [ext_resource type="PackedScene" uid="uid://kv3flfcx4tkv" path="res://scenes/weapons/bone/bone_heavy_shield.tscn" id="8_fav25"]
 [ext_resource type="SpriteFrames" uid="uid://cncrhce2o3rti" path="res://resources/sprite_frames/enemies/warrior_orc.tres" id="8_q2118"]
 [ext_resource type="SpriteFrames" uid="uid://bvjpmj7s4ilrx" path="res://resources/sprite_frames/enemies/regular_orc.tres" id="9_rcbi5"]
 [ext_resource type="PackedScene" uid="uid://npommg1a0mea" path="res://scenes/weapons/bone/bone_dagger.tscn" id="10_h47hm"]
 [ext_resource type="PackedScene" uid="uid://qb7qggjr7m25" path="res://scenes/Levels/woods_level.tscn" id="13_8lsl7"]
+[ext_resource type="Script" path="res://scenes/network.gd" id="14_swmcw"]
 
 [node name="Main" type="Node2D"]
 scale = Vector2(2, 2)
 
-[node name="Player" parent="." instance=ExtResource("1_bcru2")]
-position = Vector2(369, 1352.5)
-scale = Vector2(1, 1)
-motion_mode = 1
-left_weapon_class = ExtResource("2_3syp7")
-right_weapon_class = ExtResource("3_gcqtt")
+[node name="Network" type="Node" parent="."]
+script = ExtResource("14_swmcw")
 
 [node name="Enemy" parent="." instance=ExtResource("2_d7o8x")]
 position = Vector2(883, 161)

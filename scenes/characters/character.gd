@@ -58,7 +58,7 @@ func _on_animation_player_animation_finished(anim_name):
 		queue_free()
 
 func _on_hurt_area_area_entered(area):
-	if self.name != area.get_parent().get_parent().name and area.name == "HitArea":
+	if self.scene_file_path != area.get_parent().get_parent().scene_file_path and area.name == "HitArea":
 		$AnimationPlayer.play("hit")
 		hp -= 10
 		$HealthBar.set_value_no_signal(hp)
