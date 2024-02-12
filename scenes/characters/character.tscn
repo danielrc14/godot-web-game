@@ -449,8 +449,6 @@ radius = 9.5
 height = 31.0
 
 [node name="Character" type="CharacterBody2D"]
-position = Vector2(576, 334)
-scale = Vector2(2, 2)
 script = ExtResource("1_04yj6")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
