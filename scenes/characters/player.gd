@@ -9,8 +9,8 @@ var player_id: int
 var player_velocity_vector = Vector2.ZERO
 
 func _ready():
-	super()
 	max_hp = max_player_hp
+	super()
 	if is_remote_player:
 		remove_child($Camera)
 	else:
@@ -47,6 +47,7 @@ func _physics_process(delta):
 func _on_hit_area_area_entered(area):
 	if self.scene_file_path != area.get_parent().get_parent().scene_file_path and area.name == "HurtArea":
 		camera_shake.emit()
+
 		
 func _on_hurt_area_area_entered(area):
 	super(area)

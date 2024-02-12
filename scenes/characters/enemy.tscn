@@ -11,12 +11,15 @@ shader = ExtResource("3_6lfib")
 shader_parameter/hit_opacity = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmoo4"]
-radius = 135.504
+radius = 203.158
 
 [node name="Enemy" instance=ExtResource("1_obi7s")]
 script = ExtResource("2_fkyj0")
 max_enemy_hp = 30
-enemy_speed = 100
+enemy_speed = 80
+enemy_attack_speed = 1.4
+distance_to_attack = 50.0
+attack_cooldown = 1.5
 
 [node name="Body" parent="." index="0"]
 material = SubResource("ShaderMaterial_xrs4i")
