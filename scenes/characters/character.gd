@@ -9,6 +9,7 @@ class_name Character
 @export var sprite_frames: SpriteFrames = null
 @export var max_hp: int = 0
 var hp: int = 0
+var dead = false
 
 func _ready():
 	$Body.scale.x *= direction
@@ -30,7 +31,7 @@ func _ready():
 	$HealthBar.set_value_no_signal(hp)
 
 func can_act():
-	return not $AnimationPlayer.current_animation in ["slash", "death", "hit"]
+	return not dead and not $AnimationPlayer.current_animation in ["slash", "death", "hit", "RESET"]
 
 func attack():
 	$AnimationPlayer.play("slash", -1, attack_speed, false)
@@ -52,14 +53,15 @@ func move(velocity_vector, delta):
 			
 func die():
 	$AnimationPlayer.play("death")
+	dead = true
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "death":
-		queue_free()
+	pass
 
 func _on_hurt_area_area_entered(area):
-	if self.scene_file_path != area.get_parent().get_parent().scene_file_path and area.name == "HitArea":
-		$AnimationPlayer.play("hit")
+	if self.scene_file_path != area.get_parent().get_parent().scene_file_path and area.name == "HitArea" and hp > 0:
+		$AnimationPlayer.play("RESET")
+		$AnimationPlayer.queue("hit")
 		hp -= 10
 		$HealthBar.set_value_no_signal(hp)
 		if hp <= 0:
