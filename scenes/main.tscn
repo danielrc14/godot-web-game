@@ -13,24 +13,23 @@
 [ext_resource type="Script" path="res://scenes/network.gd" id="14_swmcw"]
 
 [node name="Main" type="Node2D"]
-scale = Vector2(2, 2)
 
 [node name="Network" type="Node" parent="."]
 script = ExtResource("14_swmcw")
 
 [node name="Enemy" parent="." instance=ExtResource("2_d7o8x")]
 position = Vector2(883, 161)
-scale = Vector2(1, 1)
 motion_mode = 1
+enemy_speed = 100
 direction = -1
 left_weapon_class = ExtResource("5_ekkyr")
 sprite_frames = ExtResource("7_fiv8a")
 
 [node name="Enemy2" parent="." instance=ExtResource("2_d7o8x")]
 position = Vector2(960, 512)
-scale = Vector2(1, 1)
 motion_mode = 1
 max_enemy_hp = 50
+enemy_speed = 100
 direction = -1
 left_weapon_class = ExtResource("5_jfgcv")
 right_weapon_class = ExtResource("8_fav25")
@@ -38,8 +37,8 @@ sprite_frames = ExtResource("8_q2118")
 
 [node name="Enemy3" parent="." instance=ExtResource("2_d7o8x")]
 position = Vector2(784, 426)
-scale = Vector2(1, 1)
 motion_mode = 1
+enemy_speed = 100
 direction = -1
 left_weapon_class = ExtResource("10_h47hm")
 right_weapon_class = ExtResource("6_jsv0d")

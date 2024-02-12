@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Character
 
 @export_enum("Left:-1", "Right:1") var direction = 1
-@export var speed = 300.0
+@export var speed = 150.0
 @export var attack_speed = 1.7
 @export var left_weapon_class: PackedScene = null
 @export var right_weapon_class: PackedScene = null
