@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://0kvi2eatm2dy"]
+[gd_scene load_steps=7 format=3 uid="uid://0kvi2eatm2dy"]
 
 [ext_resource type="PackedScene" uid="uid://eyohjxgn8cey" path="res://scenes/characters/character.tscn" id="1_obi7s"]
 [ext_resource type="Script" path="res://scenes/characters/enemy.gd" id="2_fkyj0"]
@@ -10,9 +10,13 @@ resource_local_to_scene = true
 shader = ExtResource("3_6lfib")
 shader_parameter/hit_opacity = 0.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_jmoo4"]
+radius = 135.504
+
 [node name="Enemy" instance=ExtResource("1_obi7s")]
 script = ExtResource("2_fkyj0")
 max_enemy_hp = 30
+enemy_speed = 100
 
 [node name="Body" parent="." index="0"]
 material = SubResource("ShaderMaterial_xrs4i")
@@ -23,3 +27,11 @@ frame = 3
 
 [node name="RightHand" parent="Body" index="1"]
 frame = 3
+
+[node name="DetectionArea" type="Area2D" parent="." index="4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
+shape = SubResource("CircleShape2D_jmoo4")
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
