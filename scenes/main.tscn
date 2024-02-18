@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://dejgpf2h61b5k"]
+[gd_scene load_steps=13 format=3 uid="uid://dejgpf2h61b5k"]
 
-[ext_resource type="PackedScene" uid="uid://0kvi2eatm2dy" path="res://scenes/characters/enemy.tscn" id="2_d7o8x"]
-[ext_resource type="PackedScene" uid="uid://bnpilkhra4kju" path="res://scenes/weapons/bone/bone_sword.tscn" id="5_ekkyr"]
-[ext_resource type="PackedScene" uid="uid://65wlrbyedilu" path="res://scenes/weapons/bone/bone_club.tscn" id="5_jfgcv"]
-[ext_resource type="PackedScene" uid="uid://bxyiajkasowfo" path="res://scenes/weapons/bone/bone_round_shield.tscn" id="6_jsv0d"]
-[ext_resource type="SpriteFrames" uid="uid://rhp4ihvlqsdb" path="res://resources/sprite_frames/enemies/regular_skeleton.tres" id="7_fiv8a"]
-[ext_resource type="PackedScene" uid="uid://kv3flfcx4tkv" path="res://scenes/weapons/bone/bone_heavy_shield.tscn" id="8_fav25"]
-[ext_resource type="SpriteFrames" uid="uid://cncrhce2o3rti" path="res://resources/sprite_frames/enemies/warrior_orc.tres" id="8_q2118"]
-[ext_resource type="SpriteFrames" uid="uid://bvjpmj7s4ilrx" path="res://resources/sprite_frames/enemies/regular_orc.tres" id="9_rcbi5"]
-[ext_resource type="PackedScene" uid="uid://npommg1a0mea" path="res://scenes/weapons/bone/bone_dagger.tscn" id="10_h47hm"]
+[ext_resource type="PackedScene" uid="uid://npommg1a0mea" path="res://scenes/weapons/bone/bone_dagger.tscn" id="4_idp3t"]
+[ext_resource type="SpriteFrames" uid="uid://rhp4ihvlqsdb" path="res://resources/sprite_frames/enemies/regular_skeleton.tres" id="5_03d7b"]
+[ext_resource type="PackedScene" uid="uid://bxyiajkasowfo" path="res://scenes/weapons/bone/bone_round_shield.tscn" id="6_r54sa"]
+[ext_resource type="SpriteFrames" uid="uid://bvjpmj7s4ilrx" path="res://resources/sprite_frames/enemies/regular_orc.tres" id="7_1kjgk"]
+[ext_resource type="PackedScene" uid="uid://65wlrbyedilu" path="res://scenes/weapons/bone/bone_club.tscn" id="8_1ea7m"]
+[ext_resource type="PackedScene" uid="uid://kv3flfcx4tkv" path="res://scenes/weapons/bone/bone_heavy_shield.tscn" id="9_mhihk"]
+[ext_resource type="SpriteFrames" uid="uid://cncrhce2o3rti" path="res://resources/sprite_frames/enemies/warrior_orc.tres" id="10_xefd1"]
+[ext_resource type="PackedScene" uid="uid://cglu2efw340f7" path="res://scenes/weapons/wood/wooden_lance.tscn" id="11_1gvji"]
+[ext_resource type="PackedScene" uid="uid://cepq76albt3a4" path="res://scenes/enemy_spawn_point.tscn" id="12_mkkj0"]
+[ext_resource type="PackedScene" uid="uid://bnpilkhra4kju" path="res://scenes/weapons/bone/bone_sword.tscn" id="12_rbdfj"]
 [ext_resource type="PackedScene" uid="uid://qb7qggjr7m25" path="res://scenes/Levels/woods_level.tscn" id="13_8lsl7"]
 [ext_resource type="Script" path="res://scenes/network.gd" id="14_swmcw"]
 
@@ -17,31 +18,117 @@
 [node name="Network" type="Node" parent="."]
 script = ExtResource("14_swmcw")
 
-[node name="Enemy" parent="." instance=ExtResource("2_d7o8x")]
-position = Vector2(654, 1349)
-motion_mode = 1
-enemy_speed = 80
-direction = -1
-left_weapon_class = ExtResource("5_ekkyr")
-sprite_frames = ExtResource("7_fiv8a")
-
-[node name="Enemy2" parent="." instance=ExtResource("2_d7o8x")]
-position = Vector2(960, 512)
-motion_mode = 1
-enemy_speed = 80
-direction = -1
-left_weapon_class = ExtResource("5_jfgcv")
-right_weapon_class = ExtResource("8_fav25")
-sprite_frames = ExtResource("8_q2118")
-
-[node name="Enemy3" parent="." instance=ExtResource("2_d7o8x")]
-position = Vector2(784, 426)
-motion_mode = 1
-enemy_speed = 80
-direction = -1
-left_weapon_class = ExtResource("10_h47hm")
-right_weapon_class = ExtResource("6_jsv0d")
-sprite_frames = ExtResource("9_rcbi5")
-
 [node name="WoodsLevel" parent="." instance=ExtResource("13_8lsl7")]
 z_index = -1
+
+[node name="EnemySpawnPoints" type="Node" parent="."]
+
+[node name="EnemySpawnPoint" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(198, 272)
+left_weapon_class = ExtResource("4_idp3t")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint2" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(85, 207)
+left_weapon_class = ExtResource("4_idp3t")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint3" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(196, 142)
+left_weapon_class = ExtResource("4_idp3t")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint4" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(1342, 1040)
+direction = -1
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint5" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(1471, 981)
+direction = -1
+left_weapon_class = ExtResource("8_1ea7m")
+right_weapon_class = ExtResource("9_mhihk")
+sprite_frames = ExtResource("10_xefd1")
+
+[node name="EnemySpawnPoint6" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(1340, 910)
+direction = -1
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint7" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(846, 1424)
+left_weapon_class = ExtResource("8_1ea7m")
+right_weapon_class = ExtResource("9_mhihk")
+sprite_frames = ExtResource("10_xefd1")
+
+[node name="EnemySpawnPoint8" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(675, 1425)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint9" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(768, 1296)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint10" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(948, 284)
+left_weapon_class = ExtResource("4_idp3t")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint11" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(875, 175)
+left_weapon_class = ExtResource("4_idp3t")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint12" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(1000, 178)
+left_weapon_class = ExtResource("4_idp3t")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint13" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(448, 1079)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint14" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(312, 840)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint15" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(871, 964)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint16" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(876, 1107)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint17" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(1065, 743)
+left_weapon_class = ExtResource("4_idp3t")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("7_1kjgk")
+
+[node name="EnemySpawnPoint18" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(530, 429)
+left_weapon_class = ExtResource("11_1gvji")
+right_weapon_class = ExtResource("6_r54sa")
+sprite_frames = ExtResource("5_03d7b")
+
+[node name="EnemySpawnPoint19" parent="EnemySpawnPoints" instance=ExtResource("12_mkkj0")]
+position = Vector2(1383, 400)
+left_weapon_class = ExtResource("12_rbdfj")
+sprite_frames = ExtResource("5_03d7b")

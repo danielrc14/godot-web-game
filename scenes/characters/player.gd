@@ -1,4 +1,5 @@
 extends Character
+class_name Player
 signal camera_shake
 signal player_moved(player_id, velocity_vector, previous_x, previous_y)
 signal player_attacked(player_id)
@@ -53,3 +54,8 @@ func _on_hurt_area_area_entered(area):
 	super(area)
 	if !is_remote_player and self.name != area.get_parent().get_parent().name and area.name == "HitArea":
 		camera_shake.emit()
+		
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "death":
+		queue_free()
