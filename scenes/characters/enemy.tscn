@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://0kvi2eatm2dy"]
+[gd_scene load_steps=8 format=3 uid="uid://0kvi2eatm2dy"]
 
 [ext_resource type="PackedScene" uid="uid://eyohjxgn8cey" path="res://scenes/characters/character.tscn" id="1_obi7s"]
 [ext_resource type="Script" path="res://scenes/characters/enemy.gd" id="2_fkyj0"]
@@ -13,6 +13,11 @@ shader_parameter/hit_opacity = 0.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jmoo4"]
 radius = 203.158
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_diw4r"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Enemy" instance=ExtResource("1_obi7s")]
 script = ExtResource("2_fkyj0")
 max_enemy_hp = 30
@@ -20,6 +25,9 @@ enemy_speed = 80
 enemy_attack_speed = 1.4
 distance_to_attack = 50.0
 attack_cooldown = 1.5
+left_weapon_name = ""
+right_weapon_name = ""
+sprite_frames_name = ""
 
 [node name="Body" parent="." index="0"]
 material = SubResource("ShaderMaterial_xrs4i")
@@ -35,6 +43,9 @@ frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
 shape = SubResource("CircleShape2D_jmoo4")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="5"]
+replication_config = SubResource("SceneReplicationConfig_diw4r")
 
 [connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]

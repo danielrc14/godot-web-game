@@ -1,22 +1,36 @@
 extends Character
+signal died
+signal following_player(id)
+signal unfollowing_player(id)
 
 @export var max_enemy_hp: int = 30
 @export var enemy_speed: int = 80
 @export var enemy_attack_speed: float = 1.4
 @export var distance_to_attack: float = 50
 @export var attack_cooldown: float = 1.5
-var followed_player: Node2D = null
+@export var left_weapon_name: String
+@export var right_weapon_name: String
+@export var sprite_frames_name: String
+var followed_players = []
 var attack_on_cooldown: bool = false
+var enemy_id: int
 
 
 func _ready():
 	max_hp = max_enemy_hp
 	speed = enemy_speed
 	attack_speed = enemy_attack_speed
+	if left_weapon_name:
+		left_weapon_class = load("res://scenes/weapons/bone/" + left_weapon_name + ".tscn")
+	if right_weapon_name:
+		right_weapon_class = load("res://scenes/weapons/bone/" + right_weapon_name + ".tscn")
+	if sprite_frames:
+		sprite_frames = load("res://resources/sprite_frame/enemies/" + sprite_frames_name + ".tres")
 	super()
 
 
 func _physics_process(delta):
+	"""
 	if can_act():
 		var movement_vector = Vector2.ZERO
 		var will_attack = false
@@ -41,6 +55,8 @@ func _physics_process(delta):
 		move(movement_vector, delta)
 		if will_attack:
 			enemy_attack()
+	"""
+	pass
 			
 
 func enemy_attack():
@@ -52,13 +68,25 @@ func enemy_attack():
 
 
 func _on_detection_area_area_entered(area):
-	if not followed_player and area.get_parent().get_parent().name == "Player":
-		followed_player = area.get_parent().get_parent()
+	#if area.name == "HurtArea" and area.get_parent().get_parent() is Player:
+		#followed_players.append(area.get_parent().get_parent())
+	if (
+		area.name == "HurtArea"
+		and area.get_parent().get_parent() is Player
+		and not area.get_parent().get_parent().is_remote_player
+	):
+		following_player.emit(enemy_id)
 
 
 func _on_detection_area_area_exited(area):
-	if area.name == "HurtArea" and area.get_parent().get_parent().name == "Player":
-		followed_player = null
+	#if area.name == "HurtArea" and area.get_parent().get_parent() in followed_players:
+		#followed_players.erase(area.get_parent().get_parent())
+	if (
+		area.name == "HurtArea"
+		and area.get_parent().get_parent() is Player
+		and not area.get_parent().get_parent().is_remote_player
+	):
+		unfollowing_player.emit(enemy_id)
 		
 		
 func _on_animation_player_animation_finished(anim_name):

@@ -49,6 +49,16 @@ func _on_player_moved(player_id, velocity_vector, previous_x, previous_y):
 func _on_player_attacked(player_id):
 	make_player_attack.rpc(player_id)
 	
+
+func _on_enemy_following_player(enemy_id):
+	#rpc
+	pass
+	
+
+func _on_enemy_unfollowing_player(enemy_id):
+	#rpc
+	pass
+	
 	
 @rpc("authority", "call_remote", "reliable", 0)
 func create_new_player(player_id):
@@ -82,3 +92,26 @@ func update_player_movement(player_id, velocity_vector, previous_x, previous_y):
 func make_player_attack(player_id):
 	if remote_players.has(player_id):
 		remote_players[player_id].attack()
+		
+		
+@rpc("authority", "call_remote", "reliable", 0)
+func replicate_enemies(enemies_data):
+	var enemy_scene = load("res://scenes/characters/enemy.tscn")
+	for ind in enemies_data.size():
+		var enemy_data = enemies_data[ind]
+		var enemy = enemy_scene.instantiate()
+		enemy.name = "Enemy" + str(ind)
+		enemy.enemy_id = ind
+		enemy.position = enemy_data["position"]
+		enemy.direction = enemy_data.get("direction", 1)
+		enemy.left_weapon_name = enemy_data.get("left_weapon_name", "")
+		enemy.right_weapon_name = enemy_data.get("right_weapon_name", "")
+		enemy.sprite_frames_name = enemy_data.get("sprite_frames_name", "")
+		add_child(enemy, true)
+		enemy.following_player.connect(_on_enemy_following_player)
+		enemy.unfollowing_player.connect(_on_enemy_unfollowing_player)
+		
+	
+@rpc("any_peer", "call_remote", "reliable", 0)
+func replicate_enemy_following_player(enemies_data):
+	pass
