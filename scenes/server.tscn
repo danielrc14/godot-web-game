@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwp5ijm0d4c5b"]
+
+[ext_resource type="Script" path="res://scenes/server.gd" id="1_vdtav"]
+[ext_resource type="PackedScene" uid="uid://qb7qggjr7m25" path="res://scenes/Levels/woods_level.tscn" id="2_ahn3s"]
+
+[node name="Main" type="Node"]
+
+[node name="Network" type="Node" parent="."]
+script = ExtResource("1_vdtav")
+
+[node name="WoodsLevel" parent="." instance=ExtResource("2_ahn3s")]

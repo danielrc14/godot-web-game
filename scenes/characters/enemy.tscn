@@ -10,8 +10,9 @@ resource_local_to_scene = true
 shader = ExtResource("3_6lfib")
 shader_parameter/hit_opacity = 0.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jmoo4"]
-radius = 203.158
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_so31k"]
+radius = 88.0
+height = 296.0
 
 [node name="Enemy" instance=ExtResource("1_obi7s")]
 script = ExtResource("2_fkyj0")
@@ -20,6 +21,9 @@ enemy_speed = 80
 enemy_attack_speed = 1.4
 distance_to_attack = 50.0
 attack_cooldown = 1.5
+left_weapon_name = ""
+right_weapon_name = ""
+sprite_frames_name = ""
 
 [node name="Body" parent="." index="0"]
 material = SubResource("ShaderMaterial_xrs4i")
@@ -34,7 +38,8 @@ frame = 3
 [node name="DetectionArea" type="Area2D" parent="." index="4"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0"]
-shape = SubResource("CircleShape2D_jmoo4")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_so31k")
 
 [connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]

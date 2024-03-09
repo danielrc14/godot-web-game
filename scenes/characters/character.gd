@@ -8,7 +8,9 @@ class_name Character
 @export var right_weapon_class: PackedScene = null
 @export var sprite_frames: SpriteFrames = null
 @export var max_hp: int = 0
-var hp: int = 0
+enum {IDLE, RUN, ATTACK, HIT, DEATH}
+@export var state: int = IDLE;
+@export var hp: int = 0
 var dead = false
 
 func _ready():
@@ -29,19 +31,38 @@ func _ready():
 	$HealthBar.min_value = 0
 	$HealthBar.max_value = max_hp
 	$HealthBar.set_value_no_signal(hp)
+	
+func animate_state():
+	match state:
+		IDLE:
+			$AnimationPlayer.play("idle")
+		RUN: 
+			$AnimationPlayer.play("run")
+		ATTACK:
+			$AnimationPlayer.play("attack", -1, attack_speed, false)
+		HIT:
+			if not $AnimationPlayer.current_animation in ["hit", "RESET"]:
+				$AnimationPlayer.play("RESET")
+				$AnimationPlayer.queue("hit")
+		DEATH:
+			$AnimationPlayer.play("death")
+			
+func _physics_process(delta):
+	$Label.set_text(str(state))
+	animate_state()
 
 func can_act():
-	return not dead and not $AnimationPlayer.current_animation in ["slash", "death", "hit", "RESET"]
+	return not dead and not state in [ATTACK, DEATH, HIT]
 
 func attack():
-	$AnimationPlayer.play("slash", -1, attack_speed, false)
+	state = ATTACK
 
 func move(velocity_vector, delta):
 	if velocity_vector.length() > 0:
 		velocity_vector = velocity_vector.normalized() * speed
-		$AnimationPlayer.play("run")
+		state = RUN
 	else:
-		$AnimationPlayer.play("idle")
+		state = IDLE
 		
 	set_velocity(velocity_vector)
 	move_and_slide()
@@ -52,16 +73,16 @@ func move(velocity_vector, delta):
 			$Body.scale.x *= -1
 			
 func die():
-	$AnimationPlayer.play("death")
+	state = DEATH
 	dead = true
 
 func _on_animation_player_animation_finished(anim_name):
-	pass
+	if anim_name in ["attack", "hit", "RESET"]:
+		state = IDLE
 
 func _on_hurt_area_area_entered(area):
 	if self.scene_file_path != area.get_parent().get_parent().scene_file_path and area.name == "HitArea" and hp > 0:
-		$AnimationPlayer.play("RESET")
-		$AnimationPlayer.queue("hit")
+		state = HIT
 		hp -= 10
 		$HealthBar.set_value_no_signal(hp)
 		if hp <= 0:
