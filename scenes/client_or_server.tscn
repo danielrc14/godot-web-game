@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vpj42gt14mld"]
+
+[ext_resource type="Script" path="res://scenes/client_or_server.gd" id="1_bril3"]
+
+[node name="ClientOrServer" type="Node"]
+script = ExtResource("1_bril3")

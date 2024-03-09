@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Portfolio web game"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/client_or_server.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 

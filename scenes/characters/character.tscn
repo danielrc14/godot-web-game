@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://eyohjxgn8cey"]
+[gd_scene load_steps=19 format=3 uid="uid://eyohjxgn8cey"]
 
 [ext_resource type="Script" path="res://scenes/characters/character.gd" id="1_04yj6"]
 [ext_resource type="SpriteFrames" uid="uid://dxmx32dcrtfy" path="res://resources/sprite_frames/player/knight.tres" id="2_46u8l"]
@@ -343,7 +343,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_b6eth"]
-resource_name = "slash"
+resource_name = "attack"
 length = 5.0001
 step = 1.0
 tracks/0/type = "value"
@@ -356,7 +356,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"slash"]
+"values": [&"attack"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -434,11 +434,11 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ynqkk"]
 _data = {
 "RESET": SubResource("Animation_hm46e"),
+"attack": SubResource("Animation_b6eth"),
 "death": SubResource("Animation_os3w6"),
 "hit": SubResource("Animation_xocls"),
 "idle": SubResource("Animation_g301j"),
-"run": SubResource("Animation_uv6cx"),
-"slash": SubResource("Animation_b6eth")
+"run": SubResource("Animation_uv6cx")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uftg7"]
@@ -448,6 +448,20 @@ bg_color = Color(0, 1, 0, 1)
 radius = 9.5
 height = 31.0
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qcmke"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:state")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:hp")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Body:scale")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_04yj6")
 
@@ -455,7 +469,8 @@ script = ExtResource("1_04yj6")
 texture_filter = 1
 material = SubResource("ShaderMaterial_2nto4")
 sprite_frames = ExtResource("2_46u8l")
-animation = &"idle"
+animation = &"attack"
+frame = 1
 
 [node name="LeftHand" type="Sprite2D" parent="Body"]
 z_index = 1
@@ -525,6 +540,16 @@ value = 50.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_7jwnk")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_qcmke")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 20.0
+offset_bottom = 13.0
 
 [connection signal="area_entered" from="Body/HurtArea" to="." method="_on_hurt_area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
