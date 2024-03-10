@@ -34,7 +34,8 @@ func create_player(is_remote_player, player_id):
 		remote_players[player_id] = player_node
 	else:
 		local_player = player_node
-		player_node.set_multiplayer_authority(player_id)
+	
+	player_node.set_multiplayer_authority(player_id)
 	
 
 func _on_peer_connection_failed():
