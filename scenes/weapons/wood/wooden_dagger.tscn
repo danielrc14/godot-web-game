@@ -1,12 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://boqwmlf74ro0x"]
+[gd_scene load_steps=2 format=3 uid="uid://cv2vb0rqnryjc"]
 
-[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_84th5"]
+[ext_resource type="PackedScene" uid="uid://jmhhg0iuu8cd" path="res://scenes/weapons/weapon.tscn" id="1_hp5il"]
 
-[node name="WoodenDagger" type="Sprite2D"]
-show_behind_parent = true
-texture_filter = 1
+[node name="WoodenDagger" instance=ExtResource("1_hp5il")]
 position = Vector2(0, -6)
-texture = ExtResource("1_84th5")
 flip_h = true
-region_enabled = true
 region_rect = Rect2(32, 16, 16, 32)

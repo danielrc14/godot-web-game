@@ -1,11 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://ow6e37c1x512"]
+[gd_scene load_steps=2 format=3 uid="uid://bfdpwux5f3jdm"]
 
-[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_j3lgu"]
+[ext_resource type="PackedScene" uid="uid://jmhhg0iuu8cd" path="res://scenes/weapons/weapon.tscn" id="1_x5woo"]
 
-[node name="WoodenSword" type="Sprite2D"]
-show_behind_parent = true
-texture_filter = 1
-position = Vector2(0, -15)
-texture = ExtResource("1_j3lgu")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 48)
+[node name="WoodenSword" instance=ExtResource("1_x5woo")]

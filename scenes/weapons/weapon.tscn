@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://jmhhg0iuu8cd"]
+
+[ext_resource type="Script" path="res://scenes/weapons/weapon.gd" id="1_7lpdm"]
+[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_08g6e"]
+
+[node name="Weapon" type="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -15)
+texture = ExtResource("1_08g6e")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 48)
+script = ExtResource("1_7lpdm")

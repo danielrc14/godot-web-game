@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp3alo4h42dqo"]
+[gd_scene load_steps=2 format=3 uid="uid://dxsxiolgjtaav"]
 
+[ext_resource type="PackedScene" uid="uid://jmhhg0iuu8cd" path="res://scenes/weapons/weapon.tscn" id="1_lrc2r"]
 [ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_c3mhe"]
 
-[node name="WoodenScythe" type="Sprite2D"]
+[node name="WoodenScythe" instance=ExtResource("1_lrc2r")]
 show_behind_parent = true
 texture_filter = 1
 position = Vector2(4, -10)

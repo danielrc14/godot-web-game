@@ -1,12 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://76q5mm07y1vu"]
+[gd_scene load_steps=2 format=3 uid="uid://5nopy11esvxp"]
 
-[ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_vrkfq"]
+[ext_resource type="PackedScene" uid="uid://jmhhg0iuu8cd" path="res://scenes/weapons/weapon.tscn" id="1_a0rbe"]
 
-[node name="WoodenAxe" type="Sprite2D"]
-show_behind_parent = true
-texture_filter = 1
+[node name="WoodenAxe" instance=ExtResource("1_a0rbe")]
 position = Vector2(0, -8)
-texture = ExtResource("1_vrkfq")
 flip_h = true
-region_enabled = true
 region_rect = Rect2(48, 16, 16, 32)

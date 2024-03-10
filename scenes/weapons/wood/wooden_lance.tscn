@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cglu2efw340f7"]
+[gd_scene load_steps=2 format=3 uid="uid://bqn6t11imei82"]
 
+[ext_resource type="PackedScene" uid="uid://jmhhg0iuu8cd" path="res://scenes/weapons/weapon.tscn" id="1_qt652"]
 [ext_resource type="Texture2D" uid="uid://uo8q4y277geu" path="res://textures/Weapons/Wood/Wood.png" id="1_1kb2u"]
 
-[node name="WoodenLance" type="Sprite2D"]
+[node name="WoodenLance" instance=ExtResource("1_qt652")]
 show_behind_parent = true
 texture_filter = 1
 position = Vector2(0, -18)
