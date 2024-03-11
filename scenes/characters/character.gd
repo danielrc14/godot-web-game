@@ -32,6 +32,11 @@ func _ready():
 	$HealthBar.max_value = max_hp
 	$HealthBar.set_value_no_signal(hp)
 	
+	$Body/HitArea/HitBox.scale.x *= get_weapon_hitbox_size()
+	$Body/HitArea/HitBox.scale.y *= get_weapon_hitbox_size()
+	$Body/WeaponSlash.scale.x *= get_weapon_hitbox_size()
+	$Body/WeaponSlash.scale.y *= get_weapon_hitbox_size()
+	
 func animate_state():
 	match state:
 		IDLE:
@@ -39,7 +44,7 @@ func animate_state():
 		RUN: 
 			$AnimationPlayer.play("run")
 		ATTACK:
-			$AnimationPlayer.play("attack", -1, attack_speed, false)
+			$AnimationPlayer.play("attack", -1, attack_speed * get_weapon_attack_speed(), false)
 		HIT:
 			if not $AnimationPlayer.current_animation in ["hit", "RESET"]:
 				$AnimationPlayer.play("RESET")
@@ -48,7 +53,7 @@ func animate_state():
 			$AnimationPlayer.play("death")
 			
 func _physics_process(delta):
-	$Label.set_text(str(state))
+	$HealthBar.set_value_no_signal(hp)
 	animate_state()
 
 func can_act():
@@ -75,6 +80,30 @@ func move(velocity_vector, delta):
 func die():
 	state = DEATH
 	dead = true
+	
+func get_weapon():
+	var left_weapon_hand = $Body/LeftHand
+	if left_weapon_hand.get_child_count() > 0:
+		return left_weapon_hand.get_child(0)
+	return null
+	
+func get_weapon_damage():
+	var weapon = get_weapon()
+	if weapon:
+		return weapon.weapon_damage
+	return 0
+	
+func get_weapon_attack_speed():
+	var weapon = get_weapon()
+	if weapon:
+		return weapon.attack_speed
+	return 1
+	
+func get_weapon_hitbox_size():
+	var weapon = get_weapon()
+	if weapon:
+		return weapon.hitbox_size
+	return 1
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name in ["attack", "hit", "RESET"]:
@@ -83,7 +112,6 @@ func _on_animation_player_animation_finished(anim_name):
 func _on_hurt_area_area_entered(area):
 	if self.scene_file_path != area.get_parent().get_parent().scene_file_path and area.name == "HitArea" and hp > 0:
 		state = HIT
-		hp -= 10
-		$HealthBar.set_value_no_signal(hp)
+		hp -= area.get_parent().get_parent().get_weapon_damage()
 		if hp <= 0:
 			die()
