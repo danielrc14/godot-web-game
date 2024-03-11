@@ -8,3 +8,5 @@ position = Vector2(0, -8)
 texture = ExtResource("1_7kah1")
 flip_h = true
 region_rect = Rect2(16, 16, 16, 32)
+weapon_damage = 15
+attack_speed = 0.8

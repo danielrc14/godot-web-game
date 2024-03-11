@@ -1,13 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd73c2lcstn60"]
+[gd_scene load_steps=3 format=3 uid="uid://npommg1a0mea"]
 
 [ext_resource type="PackedScene" uid="uid://jmhhg0iuu8cd" path="res://scenes/weapons/weapon.tscn" id="1_dxegx"]
 [ext_resource type="Texture2D" uid="uid://qxxqk1j5hhp4" path="res://textures/Weapons/Bone/Bone.png" id="1_x3b8w"]
 
 [node name="BoneDagger" instance=ExtResource("1_dxegx")]
-show_behind_parent = true
-texture_filter = 1
 position = Vector2(0, -8)
 texture = ExtResource("1_x3b8w")
 flip_h = true
-region_enabled = true
 region_rect = Rect2(32, 16, 16, 32)
+weapon_damage = 8
+attack_speed = 1.5
+hitbox_size = 0.8
