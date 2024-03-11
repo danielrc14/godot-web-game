@@ -85,3 +85,8 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "death":
 		died.emit(enemy_id)
 		queue_free()
+		
+
+func _on_hurt_area_area_entered(area):
+	if is_server:
+		super(area)
