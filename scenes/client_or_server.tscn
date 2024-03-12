@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://vpj42gt14mld"]
+[gd_scene load_steps=2 format=3 uid="uid://cxymaexgliqa0"]
 
-[ext_resource type="Script" path="res://scenes/client_or_server.gd" id="1_bril3"]
+[sub_resource type="GDScript" id="GDScript_fihfi"]
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var server = load(\"res://scenes/server.tscn\").instantiate()
+	add_child(server)
+	if server.get_node(\"Network\").server_check != OK:
+		remove_child(server)
+		server.queue_free()
+		var client = load(\"res://scenes/UI/weapon_election_menu.tscn\").instantiate()
+		add_child(client)
+"
 
 [node name="ClientOrServer" type="Node"]
-script = ExtResource("1_bril3")
+script = SubResource("GDScript_fihfi")

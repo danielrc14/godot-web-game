@@ -3,7 +3,7 @@ extends Node
 var peer = ENetMultiplayerPeer.new()
 var PORT = 8000
 var MAX_PLAYERS = 100
-var players_ids = []
+var players_weapons = {}
 var initial_enemies_data = [
 	{"position": Vector2(198, 272), "left_weapon_name": "bone_dagger", "sprite_frames_name": "regular_skeleton"},
 	{"position": Vector2(85, 207), "left_weapon_name": "bone_dagger", "sprite_frames_name": "regular_skeleton"},
@@ -36,6 +36,8 @@ func _ready():
 	start_server()
 	if server_check == OK:
 		create_enemies()
+	else:
+		get_tree().change_scene_to_file.call_deferred("res://scenes/UI/weapon_election_menu.tscn")
 
 
 func start_server():
@@ -46,11 +48,12 @@ func start_server():
 		peer.peer_disconnected.connect(_on_peer_disconnected)
 	
 	
-func create_player(player_id):
+func create_player(player_id, weapon_name):
 	var player_node = player_scene.instantiate()
 	player_node.is_remote_player = true
 	player_node.player_id = player_id
-	player_node.left_weapon_class = load("res://scenes/weapons/wood/wooden_sword.tscn")
+	if weapon_name:
+		player_node.left_weapon_class = load("res://scenes/weapons/wood/" + weapon_name + ".tscn")
 	player_node.right_weapon_class = load("res://scenes/weapons/wood/wooden_round_shield.tscn")
 	player_node.sprite_frames = load("res://resources/sprite_frames/player/knight.tres")
 	player_node.position.x = 369
@@ -58,6 +61,7 @@ func create_player(player_id):
 	player_node.name = "Player" + str(player_id)
 	add_child(player_node, true)
 	player_node.set_multiplayer_authority(player_id)
+	players_weapons[player_id] = weapon_name
 	
 	
 func create_enemy(enemy_id):
@@ -102,17 +106,16 @@ func serialize_enemies():
 
 func _on_peer_connected(player_id):
 	print("Player id " + str(player_id) + " connected")
-	players_ids.append(player_id)
-	create_new_player.rpc(player_id)
-	create_existing_players.rpc(player_id, players_ids)
+	
+	# Create player and enemy data on the new client
+	create_existing_players.rpc(player_id, players_weapons)
 	var enemies_data = serialize_enemies()
 	replicate_enemies.rpc(enemies_data)
-	create_player(player_id)
 	
 	
 func _on_peer_disconnected(player_id):
 	print("Player id " + str(player_id) + " disconnected")
-	players_ids.erase(player_id)
+	players_weapons.erase(player_id)
 	remove_player.rpc(player_id)
 	get_node("Player" + str(player_id)).queue_free()
 	
@@ -123,13 +126,19 @@ func _on_enemy_died(enemy_id):
 	replicate_enemies.rpc([serialize_enemy(enemies[enemy_id])])
 	
 
+@rpc("any_peer", "call_remote", "reliable", 0)
+func create_new_player(player_id, weapon_name):
+	create_player(player_id, weapon_name)
+	create_new_player_server.rpc(player_id, weapon_name)
+	
+	
 @rpc("authority", "call_remote", "reliable", 0)
-func create_new_player(_player_id):
+func create_new_player_server(_player_id, _weapon_name):
 	pass
 	
 	
 @rpc("authority", "call_remote", "reliable", 0)
-func create_existing_players(_incoming_player_id, _players_ids):
+func create_existing_players(_incoming_player_id, _players_weapons):
 	pass
 	
 
@@ -139,5 +148,5 @@ func remove_player(_player_id):
 
 
 @rpc("authority", "call_remote", "reliable", 0)
-func replicate_enemies(enemies_data):
+func replicate_enemies(_enemies_data):
 	pass

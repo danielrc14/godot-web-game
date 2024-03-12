@@ -15,6 +15,15 @@ func _ready():
 		remove_child($Camera)
 	else:
 		$Body/HitArea.area_entered.connect(_on_hit_area_area_entered)
+		
+		
+func set_weapon(weapon_name):
+	print(weapon_name)
+	print(get_weapon())
+	if not get_weapon():
+		left_weapon_class = load("res://scenes/weapons/wood/" + weapon_name + ".tscn")
+		var left_weapon = left_weapon_class.instantiate()
+		$Body/LeftHand.add_child(left_weapon)
 
 
 func handle_inputs(delta):

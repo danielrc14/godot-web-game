@@ -34,7 +34,6 @@ func move_enemy(delta):
 	if followed_players.size() > 0:
 		var followed_player = followed_players[0]
 		if followed_player and not followed_player.dead:
-			var position_vector = Vector2()
 			var distance_to_player = Vector2(position.x, position.y).distance_to(Vector2(
 				followed_player.position.x,
 				followed_player.position.y

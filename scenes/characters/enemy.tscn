@@ -28,7 +28,6 @@ sprite_frames_name = ""
 [node name="Body" parent="." index="0"]
 material = SubResource("ShaderMaterial_xrs4i")
 sprite_frames = ExtResource("3_3e7hp")
-frame = 0
 
 [node name="LeftHand" parent="Body" index="0"]
 frame = 3

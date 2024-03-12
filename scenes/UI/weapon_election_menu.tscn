@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://djrnutfnmbd2j"]
+
+[ext_resource type="PackedScene" uid="uid://bfdpwux5f3jdm" path="res://scenes/weapons/wood/wooden_sword.tscn" id="1_ets18"]
+[ext_resource type="Script" path="res://scenes/UI/weapon_election_menu.gd" id="1_fpq51"]
+[ext_resource type="PackedScene" uid="uid://5nopy11esvxp" path="res://scenes/weapons/wood/wooden_axe.tscn" id="2_dp4c1"]
+[ext_resource type="PackedScene" uid="uid://cv2vb0rqnryjc" path="res://scenes/weapons/wood/wooden_dagger.tscn" id="3_d8t8w"]
+[ext_resource type="PackedScene" uid="uid://qb7qggjr7m25" path="res://scenes/Levels/woods_level.tscn" id="4_hk5i3"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_px5kx"]
+load_path = "res://.godot/imported/Wood.png-0c8c87a09c842bdbaf34ced6a76e86e0.ctex"
+
+[node name="WeaponElectionMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fpq51")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+z_index = 8
+layout_mode = 0
+offset_left = -278.0
+offset_top = -187.0
+offset_right = 1593.0
+offset_bottom = 931.0
+color = Color(0, 0, 0, 0.537255)
+
+[node name="WoodsLevel" parent="." instance=ExtResource("4_hk5i3")]
+position = Vector2(-122, -137)
+
+[node name="Label" type="Label" parent="."]
+z_index = 8
+layout_mode = 0
+offset_left = 445.0
+offset_top = 123.0
+offset_right = 745.0
+offset_bottom = 154.0
+text = "Select a weapon"
+horizontal_alignment = 1
+
+[node name="ItemListContainer" type="ColorRect" parent="."]
+z_index = 8
+layout_mode = 0
+offset_left = 367.0
+offset_top = 225.0
+offset_right = 836.0
+offset_bottom = 357.0
+color = Color(0, 0, 0, 0.141176)
+
+[node name="ItemList" type="ItemList" parent="ItemListContainer"]
+z_index = 9
+layout_mode = 0
+offset_left = 9.0
+offset_top = 86.0
+offset_right = 460.0
+offset_bottom = 123.0
+allow_search = false
+item_count = 3
+max_columns = 3
+same_column_width = true
+fixed_column_width = 141
+icon_mode = 0
+item_0/text = "Sword"
+item_1/text = "Axe"
+item_2/text = "Dagger"
+
+[node name="WoodenSword" parent="ItemListContainer" instance=ExtResource("1_ets18")]
+z_index = 10
+position = Vector2(84, 42)
+texture = SubResource("CompressedTexture2D_px5kx")
+
+[node name="WoodenAxe" parent="ItemListContainer" instance=ExtResource("2_dp4c1")]
+z_index = 10
+position = Vector2(229, 48)
+
+[node name="WoodenDagger" parent="ItemListContainer" instance=ExtResource("3_d8t8w")]
+z_index = 10
+position = Vector2(375, 50)
+
+[node name="ContinueButton" type="Button" parent="."]
+z_index = 8
+layout_mode = 0
+offset_left = 559.0
+offset_top = 482.0
+offset_right = 638.0
+offset_bottom = 513.0
+text = "Continue"

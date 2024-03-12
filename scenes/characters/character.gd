@@ -52,7 +52,7 @@ func animate_state():
 		DEATH:
 			$AnimationPlayer.play("death")
 			
-func _physics_process(delta):
+func _physics_process(_delta):
 	$HealthBar.set_value_no_signal(hp)
 	animate_state()
 
@@ -62,7 +62,7 @@ func can_act():
 func attack():
 	state = ATTACK
 
-func move(velocity_vector, delta):
+func move(velocity_vector, _delta):
 	if velocity_vector.length() > 0:
 		velocity_vector = velocity_vector.normalized() * speed
 		state = RUN
